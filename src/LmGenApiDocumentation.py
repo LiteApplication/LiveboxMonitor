@@ -87,8 +87,10 @@ MODULES = [
 	'sah',
 	'SAHPairing',
 	'SambaService',
+	'ServiceInvocation',		# LB7 only
 	'Scheduler',
 	'Screen',					# LB6 only
+	'SFP',						# LB4 only
 	'SpeedTest',
 	'SrvInterface',
 	'SSLEServer',

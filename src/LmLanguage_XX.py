@@ -37,7 +37,9 @@ LABELS = {
 		'Loading device list...': '',
 		'<None>': '',
 		'Unknown': '',
-		'UNKNOWN': ''
+		'UNKNOWN': '',
+		'Guest 2.4GHz': '',
+		'Guest 5GHz': ''
 	},
 
 	# Device list - IPv6 dialog
@@ -74,6 +76,9 @@ LABELS = {
 		'Tx': '',
 		'RxRate': '',
 		'TxRate': '',
+		'Fiber': '',
+		'Guest 2.4GHz': '',
+		'Guest 5GHz': '',
 		'Attribute': '',
 		'Value': '',
 		'Livebox Infos': '',
@@ -223,6 +228,14 @@ LABELS = {
 		'Power Saving Enabled': '',
 		'ONT Information': '',
 		'ONT': '',
+		'SFP Status': '',
+		'Connection Status': '',
+		'Operating State': '',
+		'Orange': '',
+		'Firmware 1 Version': '',
+		'Firmware 1 State': '',
+		'Firmware 2 Version': '',
+		'Firmware 2 State': '',
 		'VEIP PPTP UNI': '',
 		'OMCI Is Tm Owner': '',
 		'Signal RxPower': '',
@@ -235,6 +248,7 @@ LABELS = {
 		'Vendor Product Code': '',
 		'Pon ID': '',
 		'Registration ID': '',
+		'Local Registration ID': '',
 		'ONT Software Version 0': '',
 		'ONT Software Version 1': '',
 		'ONT Software Version Active': '',

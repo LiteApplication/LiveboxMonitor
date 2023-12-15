@@ -341,7 +341,9 @@ class LiveboxMonitorUI(QtWidgets.QMainWindow, LmDeviceListTab.LmDeviceList,
 			LmConf.setLiveboxMAC(aMacAddr)
 			self._liveboxSoftwareVersion = d.get('SoftwareVersion', '')
 			aModel = d.get('ProductClass', '')
-			if aModel == 'Livebox 6':
+			if aModel == 'Livebox 7':
+				self._liveboxModel = 7
+			elif aModel == 'Livebox 6':
 				self._liveboxModel = 6
 			elif aModel == 'Livebox Fibre':
 				self._liveboxModel = 5
@@ -350,8 +352,40 @@ class LiveboxMonitorUI(QtWidgets.QMainWindow, LmDeviceListTab.LmDeviceList,
 			else:
 				self._liveboxModel = 0
 
+		self.determineFiberLink()
 		SetLiveboxModel(self._liveboxModel)
 
+
+	### Adjust configuration to Livebox model
+	def determineFiberLink(self):
+		if self._liveboxModel >= 5:
+			self._fiberLink = True
+		elif self._liveboxModel <= 3:
+			self._fiberLink = False
+		else:
+			# Check WAN Status for Livebox 4
+			self._fiberLink = False
+			d = None
+			try:
+				q = self._session.request('NMC:getWANStatus')
+			except BaseException as e:
+				LmTools.Error('Error: {}'.format(e))
+				q = None
+			if q is not None:
+				d = q.get('status')
+			if (d is None) or (not d):
+				LmTools.Error('NMC:getWANStatus query error')
+			if q is not None:
+				d = q.get('data')
+			else:
+				d = None
+			if d is None:
+				LmTools.Error('NMC:getWANStatus data error')
+			else:
+				aLinkType = d.get('LinkType')
+				if (aLinkType is not None) and (aLinkType.upper() == 'SFP'):
+					self._fiberLink = True
+					
 
 	### Exit with escape
 	def keyPressEvent(self, e):
